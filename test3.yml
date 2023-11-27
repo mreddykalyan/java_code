@@ -51,8 +51,6 @@
       environment:
        AWS_DEFAULT_REGION: "ap-southeast-2"
       register: push_result
-      changed_when: push_result.rc != 0
-      failed_when: push_result.rc != 0
       ignore_errors: yes
       
     - debug:
