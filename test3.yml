@@ -50,10 +50,9 @@
         docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
        AWS_DEFAULT_REGION: "ap-southeast-2"
-      register: push_result
+      register: push_output
       changed_when: push_result.rc != 0
       failed_when: push_result.rc != 0
       ignore_errors: yes
-      register: push_output
-    - debug:
+        - debug:
         var: push_output
