@@ -8,22 +8,23 @@
     - name: Clone Git repository
       shell: "git clone https://github.com/mreddykalyan/java_code.git" 
       become: yes
- 
+
     - name: Build Docker image
       shell: >
         docker build -t applicationdockerrepo:latest java_code
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
-      become: no
- 
+
     - name: Get ECR Authentication Token
       shell: "aws ecr get-login-password --region ap-southeast-2"
       register: ecr_auth_response
       changed_when: false
       ignore_errors: true
 
-    
+    - name: Debug ECR login exit code     
+      debug:       
+        var: ecr_auth_response.rc
 
     - name: Log in to ECR
       shell: >
@@ -31,22 +32,29 @@
       register: docker_login_result
       ignore_errors: true
       when: ecr_auth_response.rc == 0
- 
-   
- 
+
+    - name: Debug Docker Login Output
+      debug:
+        var: docker_login_result
+      when: docker_login_result.rc != 0
+
     - name: Tag Docker image
       shell: >
         docker tag applicationdockerrepo:latest 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
- 
+
     - name: Push Docker image to ECR
       shell: >
         docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
        AWS_DEFAULT_REGION: "ap-southeast-2"
-      register: push_output
+      register: push_result
+      changed_when: push_result.rc != 0
+      failed_when: push_result.rc != 0
       ignore_errors: yes
-      become: no
-        
+      register: push_output
+    - debug:
+        var: push_output
+
