@@ -10,8 +10,7 @@
       become: yes
 
     - name: Build Docker image
-      become: no
-          shell: 
+      shell: 
         docker build -t applicationdockerrepo:latest java_code
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
@@ -47,7 +46,7 @@
       ignore_errors: yes
 
     - name: Push Docker image to ECR
-      become: no
+      
       shell: 
         docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
