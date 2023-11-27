@@ -54,5 +54,4 @@
       changed_when: push_result.rc != 0
       failed_when: push_result.rc != 0
       ignore_errors: yes
-        - debug:
-        var: push_output
+        
