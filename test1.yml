@@ -8,11 +8,11 @@
       path: /home/ubuntu/ansible      
       register: dest_directory      
       ignore_errors: true     
-    //- name: Remove destination directory if it exists      
-      //file:        
-        // path: /home/ubuntu/ansible        
-         //state: absent    
-      //when: dest_directory.stat.exists
+    - name: Remove destination directory if it exists      
+      file:        
+         path: /home/ubuntu/ansible        
+         state: absent    
+      when: dest_directory.stat.exists
     - name: Clone Git repository
       shell: "git clone https://github.com/mreddykalyan/java_code.git" 
       become: yes
