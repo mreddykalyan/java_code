@@ -23,9 +23,7 @@
       changed_when: false
       ignore_errors: true
 
-    - name: Debug ECR login exit code     
-      debug:       
-        var: ecr_auth_response.rc
+    
 
     - name: Log in to ECR
       shell: >
@@ -34,10 +32,7 @@
       ignore_errors: true
       when: ecr_auth_response.rc == 0
  
-    - name: Debug Docker Login Output
-      debug:
-        var: docker_login_result
-      when: docker_login_result.rc != 0
+   
  
     - name: Tag Docker image
       shell: >
