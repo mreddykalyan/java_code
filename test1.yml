@@ -45,14 +45,12 @@
       debug:
         var: docker_login_result
       when: docker_login_result.rc != 0
- 
     - name: Tag Docker image
       shell: >
         docker tag applicationdockerrepo:latest 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
- 
     - name: Push Docker image to ECR
       shell: >
         docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
