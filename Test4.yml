@@ -47,5 +47,4 @@
       ignore_errors: yes
       become: no  
       
-    - debug:
-        var: push_output
+   
