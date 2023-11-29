@@ -2,7 +2,7 @@
 - name: Push Docker image to ECR
   hosts: localhost
   gather_facts: no
-  ansible_become: true
+ 
   tasks:
     - name: Remove java_code
       shell: rm -rf java_code
