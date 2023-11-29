@@ -4,9 +4,7 @@
   gather_facts: no
 
   tasks:
-    - name: Remove java_code
-      shell: rm -rf java_code
-   
+    
 
    
     - name: Build Docker image
