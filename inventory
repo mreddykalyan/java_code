@@ -1,4 +1,4 @@
 [webserver]
 172.31.18.96  ansible_user=ansible_root ansible_become=true
 [localhost]
-localhost ansible_connection=local ansible_user=root
+172.31.20.97 ansible_user=root ansible_become=true
