@@ -12,6 +12,7 @@
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
+      become: no
     
       
     - name: Get ECR Authentication Token
@@ -19,6 +20,7 @@
       register: ecr_auth_response
       changed_when: false
       ignore_errors: true
+      become: no
    
 
     -
@@ -27,7 +29,7 @@
       register: docker_login_result
       ignore_errors: true
       when: ecr_auth_response.rc == 0
-    
+      become: no
 
     
     - name: Tag Docker image
@@ -35,7 +37,7 @@
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
-     
+      become: no     
      
     - name: Push Docker image to ECR
       shell: docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
@@ -43,6 +45,6 @@
        AWS_DEFAULT_REGION: "ap-southeast-2"
       register: push_result
       ignore_errors: yes
-      
+      become: no      
       
    
