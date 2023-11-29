@@ -8,7 +8,9 @@
     - name: Remove java_code
       shell: rm -rf java_code
       become: no
-    
+    - name: Clone Git repository
+      shell: "git clone https://github.com/mreddykalyan/java_code.git"
+      become: true
     
     - name: Build Docker image
       shell: 
