@@ -5,7 +5,8 @@
   become: true
   become_user: ansible_root
   tasks:
-    
+    - name: Remove java_code
+      shell: rm -rf java_code
      
     - name: Clone Git repository
       shell: "git clone https://github.com/mreddykalyan/java_code.git" 
