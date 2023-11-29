@@ -6,6 +6,7 @@
   become_user: root
   tasks:
     - name: Remove java_code
+      become: no
       shell: rm -rf java_code 
       become: yes
     - name: Clone Git repository
