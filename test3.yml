@@ -15,7 +15,7 @@
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
-      become: no
+      become: yes
 
     - name: Get ECR Authentication Token
       shell: "aws ecr get-login-password --region ap-southeast-2"
@@ -45,7 +45,7 @@
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
-      become: no
+      become: yes
 
     - name: Push Docker image to ECR
       shell: 
