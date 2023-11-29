@@ -7,6 +7,7 @@
   tasks:
     - name: Remove java_code
       shell: rm -rf java_code 
+      become: yes
     - name: Clone Git repository
       shell: "git clone https://github.com/mreddykalyan/java_code.git" 
     
