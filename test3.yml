@@ -2,13 +2,12 @@
 - name: Push Docker image to ECR
   hosts: localhost
   gather_facts: no
-  become: yes
+  become: true
   become_user: root
   tasks:
     - name: Remove java_code
       shell: rm -rf java_code 
-      become: true
-      become_user: root
+     
     - name: Clone Git repository
       shell: "git clone https://github.com/mreddykalyan/java_code.git" 
     
@@ -18,8 +17,6 @@
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
-      become: true
-      become_user: root
       
     - name: Get ECR Authentication Token
       shell: "aws ecr get-login-password --region ap-southeast-2"
@@ -49,9 +46,7 @@
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
-      become: true
-      become_user: root
-      
+     
     - name: Push Docker image to ECR
       shell: 
         docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
@@ -59,8 +54,7 @@
        AWS_DEFAULT_REGION: "ap-southeast-2"
       register: push_result
       ignore_errors: yes
-      become: true
-      become_user: root
+      
     - debug:
         var: push_output
 
