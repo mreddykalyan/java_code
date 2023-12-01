@@ -5,9 +5,7 @@
 
   tasks:
  
-    - name: Clone Git repository
-      shell: "git clone https://github.com/mreddykalyan/java_code.git"
-
+   
     - name: Build Docker image
       shell: docker build -t applicationdockerrepo:latest java_code
       environment:
