@@ -9,11 +9,6 @@
         name:  applicationdockerrepo
         tag:  latest
         path: ./Dockerfile
-
- 
-   
-    - name: Build Docker image           
-      shell: docker build -t applicationdockerrepo:latest 
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
