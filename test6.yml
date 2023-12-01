@@ -4,9 +4,15 @@
   gather_facts: no
 
   tasks:
+    - name: Build Docker image
+      docker_image:
+        name:  applicationdockerrepo
+        tag:  latest
+        path: https://github.com/mreddykalyan/java_code.git/Dockerfile
+
  
    
-    - name: Build Docker image
+    - name: Build Docker image           
       shell: docker build -t applicationdockerrepo:latest 
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
