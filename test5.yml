@@ -7,7 +7,7 @@
  
    
     - name: Build Docker image
-      shell: docker build -t applicationdockerrepo:latest .
+      shell: sudo docker build -t applicationdockerrepo:latest .
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
@@ -32,14 +32,14 @@
 
     
     - name: Tag Docker image
-      shell: docker tag applicationdockerrepo:latest 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
+      shell:  sudo docker tag applicationdockerrepo:latest 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
         AWS_DEFAULT_REGION: "ap-southeast-2"
       ignore_errors: yes
       become: no     
      
     - name: Push Docker image to ECR
-      shell: docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
+      shell: sudo docker push 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest
       environment:
        AWS_DEFAULT_REGION: "ap-southeast-2"
       register: push_result
