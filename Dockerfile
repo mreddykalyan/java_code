@@ -1,6 +1,7 @@
-FROM maven
-WORKDIR /opt/app
+FROM python:3.8-slim
+WORKDIR /app
+COPY . /app
+RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
-COPY . /opt/app/
-RUN mvn clean package && cp ./target/*.jar /opt/app/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+ENV NAME World
+CMD ["python", "app.py"]
