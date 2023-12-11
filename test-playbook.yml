@@ -1,7 +1,7 @@
 ---
 - name: My Playbook
   hosts: 172.31.18.96
-  become: true  
+  become: true  # If tasks require elevated privileges (sudo)
   tasks:
     - name: Log in to ECR
       shell: >
@@ -12,23 +12,23 @@
     - name: pulling the image
       shell: docker pull 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo
     
-        #    - name: remove the container
-        #      shell: docker stop ps
-    
-        #   - name: creating docker container
-        #  shell: docker run -it --name cont2 33b94750c3a1
-      
     - name: Get ID of Most Recently Created Container
       command: docker ps -q -l
       register: recent_container_id
  
-        #    - name: Check if Container Exists
-        # fail:
-        # msg: "No recently created container found."
-        #  when: recent_container_id.stdout_lines | length == 0
- 
     - name: Remove the Container
-      shell: docker rm -f {{ recent_container_id.stdout }}   
+      shell: docker rm -f {{ recent_container_id.stdout }}
 
-    - name: creating docker container
-      shell: docker run -it --name cont2 33b94750c3a1
+    - name: Creating Docker Container 
+      shell: docker run -d --name webapp -p 8080:8080 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo:latest && echo "container is created"
+        #    async: 300
+        #  poll: 0
+        #   register: docker_container_result
+
+        #    - name: Wait for Docker Container to Finish
+        #  async_status:
+        #  jid: "{{ docker_container_result.ansible_job_id }}"
+        #   register: job_result
+        #  until: job_result.finished
+        #  retries: 300
+        #  delay: 10
