@@ -1,1 +1,34 @@
-buildx: failed to read current commit information with git rev-parse --is-inside-work-tree",
+---
+- name: My Playbook
+  hosts: 172.31.18.96
+  become: true  
+  tasks:
+    - name: Log in to ECR
+      shell: >
+       aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com
+      register: docker_login_result
+      ignore_errors: true
+      
+    - name: pulling the image
+      shell: docker pull 807993086586.dkr.ecr.ap-southeast-2.amazonaws.com/applicationdockerrepo
+    
+        #    - name: remove the container
+        #      shell: docker stop ps
+    
+        #   - name: creating docker container
+        #  shell: docker run -it --name cont2 33b94750c3a1
+      
+    - name: Get ID of Most Recently Created Container
+      command: docker ps -q -l
+      register: recent_container_id
+ 
+        #    - name: Check if Container Exists
+        # fail:
+        # msg: "No recently created container found."
+        #  when: recent_container_id.stdout_lines | length == 0
+ 
+    - name: Remove the Container
+      shell: docker rm -f {{ recent_container_id.stdout }}   
+
+    - name: creating docker container
+      shell: docker run -it --name cont2 33b94750c3a1
