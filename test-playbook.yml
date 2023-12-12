@@ -1,7 +1,7 @@
 ---
 - name: My Playbook
   hosts: 172.31.18.96
-  become: true  # If tasks require elevated privileges (sudo)
+  become: true 
   tasks:
     - name: Log in to ECR
       shell: >
