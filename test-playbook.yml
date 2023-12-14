@@ -1,5 +1,5 @@
 ---
-- name: Playbook
+- name: Remote playbook
   hosts: 172.31.18.96
   remote_user: ansible_root
   vars:
