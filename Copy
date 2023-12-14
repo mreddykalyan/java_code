@@ -1,0 +1,5 @@
+name: Your Playbook Name
+hosts: your_target_hosts
+remote_user: ansible_root
+vars:
+ansible_ssh_private_key_file: /path/to/private_key
