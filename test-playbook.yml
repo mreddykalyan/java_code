@@ -1,8 +1,4 @@
 ---
-- name: Debug SSH Connection
-  debug:
-  var: ansible_ssh_user
-
 - name: Remote playbook
   hosts: 172.31.18.96
   remote_user: root
