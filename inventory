@@ -1,5 +1,3 @@
-[webserver]
-172.31.18.96  ansible_user=ansible_root ansible_become=true
-ansible_connection=ssh
-ansible_sudo=true
-ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[webservers]
+172.31.18.96
+ansible_ssh_private_key_file=/root/.ssh/app_root.pem
