@@ -1,5 +1,20 @@
-name: Your Playbook Name
-hosts: your_target_hosts
-remote_user: ansible_root
-vars:
-ansible_ssh_private_key_file: /path/to/private_key
+pipeline {
+    agent any  // Replace 'any' with a specific agent label or node if needed
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    git credentialsId: 'Git_Creditionals', url: 'https://github.com/mreddykalyan/java_code.git'                   
+                }
+            }
+        }
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    sh 'ansible-playbook -i inventory test5.yml -vvv'
+                }
+            }
+        }
+    }
+}
